@@ -35,9 +35,7 @@
   <script type="module">
     import "./src/HelloWorld.js";
   </script>
-
   <h1>IP look up</h1>
-  <user-ip></user-ip>
   <user-ip></user-ip>
   <user-ip ip="24.48.0.1"></user-ip>
   <script type="module">
@@ -50,11 +48,21 @@
       console.log(await getIPClass.updateUserIP());
     }, 100);
   </script>
-
+  <h1>Location based on IP address as a map</h1>
   <location-from-ip></location-from-ip>
   <script type="module">
     import "./src/LocationFromIP.js";
   </script>
+  <h1>Example event binding</h1>
+  <script type="module">
+    import {html, render} from "lit";
+    function addIpTag(e) {
+      const userIp = document.createElement("user-ip");
+      document.querySelector("#demo").appendChild(userIp);
+    }
+    render(html`<button @click="${addIpTag}">Call the IP API</button>`, document.querySelector("#demo"));
+  </script>
+  <div id="demo"></div>
 </body>
 
 </html>
