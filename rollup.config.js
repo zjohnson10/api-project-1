@@ -6,6 +6,9 @@ import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
+const filePathRepoParts = new URL('./', import.meta.url).pathname.split('/');
+// if this line screws up replace the variable with the name of your repo
+const yourRepoName = filePathRepoParts[filePathRepoParts.length - 2];
 export default {
   input: 'index.html',
   output: {
@@ -25,7 +28,7 @@ export default {
         htmlHackyThing =>
           htmlHackyThing.replace(
             '<base href="/">',
-            '<base href="/project-two/">'
+            `<base href="/${yourRepoName}/">`
           ),
       ],
       injectServiceWorker: true,
