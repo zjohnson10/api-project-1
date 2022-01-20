@@ -20,11 +20,15 @@
       color: orange;
       font-family: Arial, Helvetica, sans-serif;
     }
+    user-ip[ip="24.48.0.1"] {
+      background-color: orange;
+    }
   </style>
   <title>Project one: </title>
 </head>
 
 <body>
+  <h1>Hello Worlds tags</h1>
   <hello-world name="cool"></hello-world>
   <hello-world name="Jeb"><p>Please clap..</p></hello-world>
   <hello-world name="partner"></hello-world>
@@ -32,6 +36,25 @@
     import "./src/HelloWorld.js";
   </script>
 
+  <h1>IP look up</h1>
+  <user-ip></user-ip>
+  <user-ip></user-ip>
+  <user-ip ip="24.48.0.1"></user-ip>
+  <script type="module">
+    // this makes user-ip web component work
+    import {UserIP} from "./src/UserIP.js";
+    // we make an instance of the class
+    const getIPClass = new UserIP();
+    // we wait 100ms and then we ask the class for the user's IP
+    setTimeout(async() => {
+      console.log(await getIPClass.updateUserIP());
+    }, 100);
+  </script>
+
+  <location-from-ip></location-from-ip>
+  <script type="module">
+    import "./src/LocationFromIP.js";
+  </script>
 </body>
 
 </html>
