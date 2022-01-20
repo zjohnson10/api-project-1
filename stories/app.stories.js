@@ -1,21 +1,21 @@
 import { html } from 'lit';
-import '../src/app.js';
+import '../src/HelloWorld.js';
 
 export default {
-  title: 'Project',
-  component: 'learning-card',
+  title: 'Hello World',
+  component: 'hello-world',
   argTypes: {
-    type: { control: 'text' },
+    name: { control: 'text' },
   },
 };
 
-function Template({ type = 'math', slot }) {
-  return html` <learning-card type="${type}"> ${slot} </learning-card> `;
+function Template({ name = 'cool', slot }) {
+  return html` <hello-world name="${name}"> ${slot} </hello-world>`;
 }
-export const Card = Template.bind({});
+export const Hello = Template.bind({});
 
-export const ScienceCard = Template.bind({});
-ScienceCard.args = {
-  type: 'science',
-  slot: html`<p>slotted content that should render</p>`,
+export const HelloJeb = Template.bind({});
+HelloJeb.args = {
+  name: 'jeb',
+  slot: html`<p>Please clap..</p>`,
 };
