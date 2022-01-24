@@ -6,19 +6,22 @@ export class LocationFromIP extends LitElement {
   static get tag() {
     return 'location-from-ip';
   }
+  static properties = {
+    locationEndpoint: {},
+    long: {},
+    lat: {},
+  };
 
   constructor() {
     super();
     this.UserIpInstance = new UserIP();
     this.locationEndpoint = 'https://freegeoip.app/json/';
-    this.long = 10.305385;
-    this.lat = 77.923029;
+    this.long = this.getGEOIPData.longitude;
+    this.lat = this.getGEOIPData.latitude;
   }
 
-  static get properties() {
-    return {};
-  }
-
+  // not sure what this does, might be setting the Geo location 
+  //to where the webpage was originally created?
   firstUpdated(changedProperties) {
     if (super.firstUpdated) {
       super.firstUpdated(changedProperties);
@@ -38,6 +41,8 @@ export class LocationFromIP extends LitElement {
       })
       .then(data => {
         console.log(data);
+        this.long = data.longitude;
+        this.lat = data.latitude;
         return data;
       });
   }
@@ -59,7 +64,7 @@ export class LocationFromIP extends LitElement {
   render() {
     // this function runs every time a properties() declared variable changes
     // this means you can make new variables and then bind them this way if you like
-    const url = `https://maps.google.com/maps?q=${this.long},${this.lat}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    const url = `https://maps.google.com/maps?q=${this.lat},${this.long}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
     return html`<iframe title="Where you are" src="${url}"></iframe> `;
   }
 }
